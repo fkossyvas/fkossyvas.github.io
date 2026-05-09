@@ -1,55 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html dir="auto" lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>My Page Title</title>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="This is me : ">
+	<meta name="description" content="My Page Description" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="assets/favicon.png" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+	<meta property="og:title" content="My Page Title" />
+	<meta property="og:description" content="My Page Description" />
+	<meta property="og:image" content="assets/og-image.png" />
 
-    <title>Just work in progress</title>
-  </head>
+	<link rel="stylesheet" href="assets/tobi.css" />
+	<link rel="stylesheet" href="assets/style.css" />
 
-  <body>
+</head>
+	<body>
+		<main>
+<header class="app__header container">
+	<div class="app__logo-wrapper"> <img class="app__logo" src="content/image/app_icon.png" alt="SegnaBurraco"></div>
+	<div class="app__infos">
+		<h1 class="app__name">SegnaBurraco</h1>
+		<p class="app__description">Segnapunti per Burraco con classifica, statistiche e gestione giocatori</p>
+		<div class="app__buttons app__buttons--desktop">
+			<a href="https://play.google.com/store" class="app__button-play" target="_blank" title="Scaricalo da Google Play">
+				<img src="assets/google-play-badge.png" alt="Scaricalo da Google Play">
+			</a>
+		</div>
+	</div>
+</header>
+<div class="app__buttons app__buttons--mobile container">
+	<a href="https://play.google.com/store" class="app__button-play" target="_blank" title="Scaricalo da Google Play">
+		<img src="assets/google-play-badge.png" alt="Scaricalo da Google Play">
+	</a>
+</div>
+<section class="app__screenshots app__section">
+	<div class="container">
+		<h2 class="app__section-title">Schermate</h2>
+	</div>
+	<div class="app__screenshots-wrapper container-desktop">
+		<div class="app__screenshots-list">
+			<a href="content/image/zck2pns1sin6ahy8eq73.jpg" class="lightbox">
+				<img src="content/image/zck2pns1sin6ahy8eq73.jpg" class="app__screenshot" alt="" />
+			</a>
+			<a href="content/image/zx4c0kkw5iezvlbqwh8o.jpg" class="lightbox">
+				<img src="content/image/zx4c0kkw5iezvlbqwh8o.jpg" class="app__screenshot" alt="" />
+			</a>
+			<a href="content/image/7fuc4hpdgyid8ju18n3r.jpg" class="lightbox">
+				<img src="content/image/7fuc4hpdgyid8ju18n3r.jpg" class="app__screenshot" alt="" />
+			</a>
+			<a href="content/image/ofmmsvu27d26c34tqtp5.jpg" class="lightbox">
+				<img src="content/image/ofmmsvu27d26c34tqtp5.jpg" class="app__screenshot" alt="" />
+			</a>
+		</div>
+	</div>
+</section>
+<section class="app__fulldescription app__section container">
+	<h2 class="app__section-title">Descrizione</h2>
+	<div class="app__fulldescription-content">
+		<p>SegnaBurraco è l&#39;app definitiva per tenere traccia delle tue partite a Burraco, il popolare gioco di carte italiano. Semplice da usare, elegante nel design e 
+ricca di funzionalità, SegnaBurraco rende ogni partita più organizzata e divertente.</p>
+<p>🃏 GESTIONE PARTITE</p>
+<p>Crea partite in tre diverse modalità:
+- 2 giocatori: sfida diretta uno contro uno
+- 3 giocatori: competizione triangolare
+- 4 giocatori: modalità in coppia, due contro due</p>
+<p>Per ogni partita puoi aggiungere le mani una alla volta, inserendo i punti base e i punti carte per ogni squadra. Il punteggio totale viene calcolato 
+automaticamente e la partita si chiude da sola quando una squadra raggiunge i 2005 punti. Puoi modificare o correggere qualsiasi mano con un semplice tocco.</p>
+<p>👥 ANAGRAFICA GIOCATORI</p>
+<p>Registra i tuoi amici e familiari nell&#39;archivio giocatori. Per ogni giocatore puoi inserire il nome completo e un soprannome. Quando crei una nuova partita,
+ selezioni i giocatori direttamente dall&#39;elenco — niente più errori di battitura o nomi dimenticati. Un giocatore associato a una o più partite non può essere 
+eliminato accidentalmente, così i tuoi dati storici sono sempre al sicuro.</p>
+<p>🏆 CLASSIFICA</p>
+<p>SegnaBurraco tiene traccia automaticamente delle performance di ogni giocatore nel tempo. La classifica assegna:
+- 2 punti per ogni vittoria in modalità singola (2 o 3 giocatori)
+- 1 punto per ogni vittoria in coppia (4 giocatori)
+Un podio visivo mette in evidenza i primi tre classificati, mentre la tabella completa mostra punti totali, vittorie e partite giocate per ogni giocatore.
+La classifica si aggiorna in tempo reale dopo ogni partita conclusa.</p>
+<p>🎨 PERSONALIZZAZIONE</p>
+<p>Scegli il tema dell&#39;app tra cinque colori: Viola, Blu, Verde, Arancione e Rosso.
+Seleziona la modalità display che preferisci: chiara, scura, o automatica (segue le impostazioni del tuo dispositivo). Le tue preferenze vengono salvate 
+e ripristinate ad ogni avvio.</p>
+<p>📱 DESIGN MODERNO</p>
+<p>SegnaBurraco è costruita seguendo le linee guida Material Design 3 di Google, con un&#39;interfaccia pulita, intuitiva e piacevole da usare. La navigazione 
+tra le sezioni è immediata grazie al menu in basso, sempre visibile e accessibile.</p>
+<p>💾 DATI AL SICURO</p>
+<p>Tutte le partite, i giocatori e le statistiche vengono salvati localmente sul tuo dispositivo tramite un database SQLite integrato. I tuoi dati sono 
+sempre disponibili, anche senza connessione a internet, e non vengono mai condivisi con server esterni.</p>
+<p>SegnaBurraco è l&#39;app che mancava a ogni appassionato di Burraco.</p>
+<p>Scaricala ora e porta il tuo gioco al livello successivo!</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/fkossyvas">View on GitHub</a>
+	</div>
+</section>
+		</main>
+		<footer class="footer">
+			<div class="container">
+				<div class="footer__container">
+					<ul class="footer__links">
+							<li class="footer__link">
+								<a href="privacy.html">Privacy</a>
+							</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
 
-          <h1 id="project_title">Just work in progress</h1>
-          <h2 id="project_tagline"></h2>
-
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-      Just wait a little bit...<br>
-      <center></center><img src="https://38.media.tumblr.com/e62da66d9d029ac71f412f9f35c324f4/tumblr_mzp4uw8vKO1qcga5ro1_500.gif"></center>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-58065358-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
+		<script type="text/javascript" src="assets/tobi.min.js" /></script>
+		<script>
+			window.onload = function () {
+				var tobi = new Tobi();
+			};
+		</script>
 
   </body>
 </html>
