@@ -1,160 +1,436 @@
 <!DOCTYPE html>
-<html dir="auto" lang="en">
+<html lang="it">
 <head>
-	<meta charset="UTF-8" />
-	<title>Privacy - My Page Title</title>
-
-	<meta name="description" content="My Page Description" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="icon" href="assets/favicon.png" />
-
-	<meta property="og:title" content="Privacy - My Page Title" />
-	<meta property="og:description" content="My Page Description" />
-	<meta property="og:image" content="assets/og-image.png" />
-
-	<link rel="stylesheet" href="assets/tobi.css" />
-	<link rel="stylesheet" href="assets/style.css" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['DM Serif Display', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            moss: { 100: '#eef3e8', 400: '#7a9e5f', 500: '#5f7f45', 600: '#4a6434' }
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: #4a6434; transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 99px; font-size: 12px;
+      font-weight: 500; letter-spacing: 0.02em;
+    }
+    [data-animate] { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    [data-animate].visible { opacity: 1; transform: translateY(0); }
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+    html { scroll-behavior: smooth; }
+    .prose h3 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: #1c1917; margin-bottom: 0.75rem; margin-top: 0; }
+    .prose p { color: #78716c; font-size: 0.9rem; line-height: 1.75; margin-bottom: 0.75rem; }
+    .prose ul { list-style: none; padding: 0; margin: 0 0 0.75rem 0; }
+    .prose ul li { color: #78716c; font-size: 0.9rem; line-height: 1.75; padding-left: 1.25rem; position: relative; }
+    .prose ul li::before { content: '·'; position: absolute; left: 0; color: #5f7f45; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
+    .prose a { color: #4a6434; text-decoration: underline; text-decoration-color: #7a9e5f; text-underline-offset: 3px; }
+    .prose a:hover { color: #2e4a20; }
+  </style>
 </head>
-	<body>
-		<main>
-<article class="page">
-	<header class="page__header">
-		<h1 class="page__title">Privacy</h1>
-	</header>
-	<div class="page__content">
-<h2 class="text-text-100 mt-3 -mb-1 text-[1.375rem] font-bold">Informativa sulla Privacy &mdash; SegnaBurraco</h2>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]"><strong>Ultimo aggiornamento:</strong> 9 maggio 2026</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">1. Titolare del Trattamento</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Il titolare del trattamento dei dati personali &egrave;:</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]"><strong>Fotios Kossyvas</strong> Email di contatto: fotisappdev@gmail.com</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">2. Introduzione</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">La presente Informativa sulla Privacy descrive come SegnaBurraco ("l'App") raccoglie, utilizza e protegge i dati degli utenti. SegnaBurraco &egrave; un'applicazione mobile per la gestione dei punteggi del gioco del Burraco.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Utilizzando l'App, l'utente accetta le pratiche descritte nella presente informativa.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">3. Dati Raccolti</h3>
-<h4 class="text-text-100 mt-2 -mb-1 text-base font-bold">3.1 Dati inseriti dall'utente</h4>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">L'App consente all'utente di inserire volontariamente:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Nomi e soprannomi dei giocatori</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Punteggi delle partite</li>
-</ul>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Questi dati vengono memorizzati <strong>esclusivamente sul dispositivo dell'utente</strong> tramite un database locale (SQLite) e non vengono mai trasmessi a server esterni o condivisi con terze parti da parte nostra.</p>
-<h4 class="text-text-100 mt-2 -mb-1 text-base font-bold">3.2 Dati di utilizzo (pubblicit&agrave;)</h4>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">L'App utilizza <strong>Google AdMob</strong> per la visualizzazione di annunci pubblicitari. Google AdMob potrebbe raccogliere automaticamente i seguenti dati:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Identificatori del dispositivo (es. Advertising ID)</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Indirizzo IP</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Dati di utilizzo dell'app</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Informazioni sul dispositivo (modello, sistema operativo, lingua)</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Dati di diagnostica e performance</li>
-</ul>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">La raccolta e il trattamento di questi dati da parte di Google sono regolati dalla <a class="underline underline underline-offset-2 decoration-1 decoration-current/40 hover:decoration-current focus:decoration-current" href="https://policies.google.com/privacy">Privacy Policy di Google</a>.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">4. Finalit&agrave; del Trattamento</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">I dati inseriti dall'utente (nomi e punteggi) vengono utilizzati esclusivamente per:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Visualizzare la lista delle partite</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Calcolare e mostrare la classifica dei giocatori</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Conservare lo storico delle partite sul dispositivo</li>
-</ul>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">I dati raccolti da Google AdMob vengono utilizzati per:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Mostrare annunci pubblicitari personalizzati o non personalizzati</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">Misurare le performance degli annunci</li>
-</ul>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">5. Base Giuridica del Trattamento</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Il trattamento dei dati personali inseriti dall'utente si basa sul <strong>consenso</strong> dell'utente stesso, espresso attraverso l'utilizzo volontario dell'App e l'inserimento dei dati.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Per i dati raccolti da Google AdMob, la base giuridica &egrave; il <strong>legittimo interesse</strong> al finanziamento del servizio tramite pubblicit&agrave;, nel rispetto del Regolamento Generale sulla Protezione dei Dati (GDPR &mdash; Regolamento UE 2016/679).</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">6. Conservazione dei Dati</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">I dati inseriti dall'utente (nomi e punteggi) vengono conservati sul dispositivo fino a quando:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2">L'utente li elimina manualmente tramite le funzioni dell'App</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2">L'utente disinstalla l'App</li>
-</ul>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Non esistono copie di backup su server remoti. La disinstallazione dell'App comporta la perdita definitiva di tutti i dati.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">7. Condivisione dei Dati</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">I dati inseriti dall'utente <strong>non vengono condivisi</strong> con terze parti da parte nostra.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">L'unica terza parte coinvolta &egrave; <strong>Google AdMob</strong>, che raccoglie dati in modo autonomo secondo la propria informativa sulla privacy. Per ulteriori informazioni su come Google utilizza i dati:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><a class="underline underline underline-offset-2 decoration-1 decoration-current/40 hover:decoration-current focus:decoration-current" href="https://policies.google.com/privacy">Privacy Policy di Google</a></li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><a class="underline underline underline-offset-2 decoration-1 decoration-current/40 hover:decoration-current focus:decoration-current" href="https://policies.google.com/technologies/partner-sites">Come Google utilizza i dati nelle app partner</a></li>
-</ul>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">8. Trasferimento Internazionale dei Dati</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">I dati inseriti dall'utente non vengono trasferiti al di fuori del dispositivo.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Google AdMob potrebbe trasferire i dati raccolti in paesi al di fuori dello Spazio Economico Europeo. Google garantisce adeguate salvaguardie per tali trasferimenti secondo le normative applicabili.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">9. Diritti dell'Utente</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">In conformit&agrave; al GDPR, l'utente ha il diritto di:</p>
-<ul class="[li_&amp;]:mb-0 [li_&amp;]:mt-1 [li_&amp;]:gap-1 [&amp;:not(:last-child)_ul]:pb-1 [&amp;:not(:last-child)_ol]:pb-1 list-disc flex flex-col gap-1 pl-8 mb-3">
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Accesso</strong>: richiedere informazioni sui dati trattati</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Rettifica</strong>: correggere dati inesatti (tramite le funzioni dell'App)</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Cancellazione</strong>: eliminare i propri dati (tramite le funzioni dell'App o disinstallando l'App)</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Limitazione</strong>: limitare il trattamento dei propri dati</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Portabilit&agrave;</strong>: ricevere i propri dati in formato strutturato</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Opposizione</strong>: opporsi al trattamento basato sul legittimo interesse</li>
-<li class="font-claude-response-body whitespace-normal break-words pl-2"><strong>Revoca del consenso</strong>: in qualsiasi momento, senza pregiudicare la liceit&agrave; del trattamento precedente</li>
-</ul>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Per esercitare questi diritti, l'utente pu&ograve; contattarci all'indirizzo email indicato nella sezione 1.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">L'utente ha inoltre il diritto di proporre reclamo all'autorit&agrave; di controllo competente. In Italia: <strong>Garante per la protezione dei dati personali</strong> &mdash; <a class="underline underline underline-offset-2 decoration-1 decoration-current/40 hover:decoration-current focus:decoration-current" href="https://www.garanteprivacy.it">www.garanteprivacy.it</a></p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">10. Sicurezza dei Dati</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">I dati inseriti dall'utente sono protetti dalle misure di sicurezza del sistema operativo Android del dispositivo. Non trasmettiamo dati su reti esterne, eliminando il rischio di intercettazione durante la trasmissione.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Tuttavia, nessun sistema &egrave; completamente sicuro. In caso di smarrimento o furto del dispositivo, i dati potrebbero essere accessibili a chi ottiene accesso fisico al dispositivo.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">11. Minori</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">L'App non &egrave; destinata a minori di 13 anni. Non raccogliamo consapevolmente dati personali di minori. Se sei un genitore o tutore e ritieni che tuo figlio abbia fornito dati personali tramite l'App, contattaci per richiederne la cancellazione.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">12. Modifiche alla Present Informativa</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Ci riserviamo il diritto di modificare la presente Informativa sulla Privacy in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con aggiornamento della data in cima al documento. In caso di modifiche sostanziali, ne daremo comunicazione tramite l'App.</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">L'utilizzo continuato dell'App dopo la pubblicazione delle modifiche costituisce accettazione delle stesse.</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<h3 class="text-text-100 mt-3 -mb-1 text-[1.125rem] font-bold">13. Contatti</h3>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]">Per qualsiasi domanda relativa alla presente Informativa sulla Privacy o al trattamento dei dati personali:</p>
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]"><strong>Email:</strong> fotisappdev@gmail.com</p>
-<hr class="border-border-200 border-t-0.5 my-3 mx-1.5" />
-<p class="font-claude-response-body break-words whitespace-normal leading-[1.7]"><em>Questa informativa &egrave; conforme al Regolamento Generale sulla Protezione dei Dati (GDPR &mdash; Regolamento UE 2016/679) e alle norme di Google Play Store in materia di privacy.</em></p>
-	</div>
-</article>
+<body class="bg-stone-50 text-stone-800 antialiased">
 
+  <div class="grain"></div>
 
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-stone-50/90 backdrop-blur-sm border-b border-stone-200">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="font-serif text-xl text-stone-800 tracking-tight">Home<span class="text-moss-500">.</span></a>
+      <nav class="flex items-center gap-8">
+        <a href="index.html#valori" class="nav-link text-sm text-stone-600 hover:text-stone-900 transition-colors">Valori</a>
+        <a href="index.html#contatti" class="nav-link text-sm text-stone-600 hover:text-stone-900 transition-colors">Contatti</a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener"
+           class="flex items-center gap-2 text-sm bg-stone-800 text-stone-50 px-4 py-2 rounded-full hover:bg-stone-700 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
 
-		</main>
-		<footer class="footer">
-			<div class="container">
-				<div class="footer__container">
-					<p class="footer__love">
-						<script>document.write('&copy;' + (new Date()).getFullYear());</script><noscript>&copy;2026</noscript> All rights reserved
-							&mdash; Template by <a href="https://www.sandoche.com" target="_blank">Sandoche</a>
-							&mdash; Powered by <a href="https://t3mpl.n4no.com/" target="_blank" title="T3MPL Editor">T3MPL</a>
-					</p>
-					<ul class="footer__links">
-							<li class="footer__link">
-								<a href="page-1.html">Privacy</a>
-							</li>
-							<li class="footer__link">
-								<a href="https://n4no.com/" targe="_blank">GitHub</a>
-							</li>
-							<li class="footer__link">
-								<a href="https://n4no.com/" targe="_blank">GitHub</a>
-							</li>
-					</ul>
-				</div>
-			</div>
-		</footer>
+  <!-- HERO -->
+  <section class="pt-32 pb-12">
+    <div class="max-w-3xl mx-auto px-6" data-animate>
+      <div class="pill bg-stone-200 text-stone-500 mb-6">Informativa legale</div>
+      <h1 class="font-serif text-5xl text-stone-900 mb-4">Privacy Policy</h1>
+      <p class="text-stone-400 text-sm">
+        Ultimo aggiornamento: <strong class="text-stone-500">9 maggio 2026</strong>
+        &nbsp;·&nbsp;
+        Titolare: <strong class="text-stone-500">Fotios Kossyvas</strong>
+      </p>
+    </div>
+  </section>
 
-		<script type="text/javascript" src="assets/tobi.min.js" /></script>
-		<script>
-			window.onload = function () {
-				var tobi = new Tobi();
-			};
-		</script>
+  <!-- INDICE -->
+  <section class="pb-8">
+    <div class="max-w-3xl mx-auto px-6" data-animate style="transition-delay:0.1s">
+      <div class="bg-moss-100 border border-moss-400/20 rounded-2xl p-6">
+        <p class="text-xs font-semibold text-moss-600 uppercase tracking-wider mb-4">Indice</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <a href="#titolare" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">01</span> Titolare del trattamento
+          </a>
+          <a href="#introduzione" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">02</span> Introduzione
+          </a>
+          <a href="#dati" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">03</span> Dati raccolti
+          </a>
+          <a href="#finalita" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">04</span> Finalità del trattamento
+          </a>
+          <a href="#base" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">05</span> Base giuridica
+          </a>
+          <a href="#conservazione" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">06</span> Conservazione dei dati
+          </a>
+          <a href="#condivisione" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">07</span> Condivisione dei dati
+          </a>
+          <a href="#trasferimento" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">08</span> Trasferimento internazionale
+          </a>
+          <a href="#diritti" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">09</span> Diritti dell'utente
+          </a>
+          <a href="#sicurezza" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">10</span> Sicurezza dei dati
+          </a>
+          <a href="#minori" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">11</span> Minori
+          </a>
+          <a href="#modifiche" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">12</span> Modifiche
+          </a>
+          <a href="#contatti" class="text-sm text-moss-600 hover:text-moss-700 transition-colors flex items-center gap-2">
+            <span class="text-moss-400">13</span> Contatti
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </body>
+  <!-- CONTENUTO -->
+  <section class="pb-24">
+    <div class="max-w-3xl mx-auto px-6 flex flex-col gap-6">
+
+      <!-- 01 -->
+      <div id="titolare" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">01</span>
+          <h3>Titolare del trattamento</h3>
+        </div>
+        <p>Il titolare del trattamento dei dati personali è:</p>
+        <div class="bg-stone-50 rounded-xl p-4 border border-stone-100 mt-2">
+          <p class="mb-0"><strong class="text-stone-700">Fotios Kossyvas</strong><br/>
+          Email: <a href="mailto:fotisappdev@gmail.com">fotisappdev@gmail.com</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div id="introduzione" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">02</span>
+          <h3>Introduzione</h3>
+        </div>
+        <p>
+          La presente Informativa sulla Privacy descrive come le applicazioni mobili 
+          sviluppate da Fotios Kossyvas ("le App") raccolgono, utilizzano e proteggono 
+          i dati degli utenti.
+        </p>
+        <p>
+          Le App sono progettate seguendo il principio della <strong class="text-stone-700">privacy by design</strong>: 
+          i dati inseriti dall'utente non vengono mai trasmessi a server esterni 
+          e rimangono sempre e solo sul dispositivo dell'utente.
+        </p>
+        <p>Utilizzando le App, l'utente accetta le pratiche descritte nella presente informativa.</p>
+      </div>
+
+      <!-- 03 -->
+      <div id="dati" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">03</span>
+          <h3>Dati raccolti</h3>
+        </div>
+
+        <p class="font-medium text-stone-600">Dati inseriti volontariamente dall'utente</p>
+        <p>
+          Le App consentono all'utente di inserire dati necessari al loro funzionamento 
+          (ad esempio nomi, punteggi, impostazioni personali). Questi dati vengono 
+          memorizzati <strong class="text-stone-700">esclusivamente sul dispositivo dell'utente</strong> 
+          tramite un database locale e non vengono mai trasmessi a server esterni 
+          né condivisi con terze parti.
+        </p>
+
+        <p class="font-medium text-stone-600 mt-4">Dati raccolti da Google AdMob (pubblicità)</p>
+        <p>
+          Le App possono mostrare un piccolo banner pubblicitario nella parte inferiore 
+          dello schermo, gestito da <strong class="text-stone-700">Google AdMob</strong>. 
+          Per erogare gli annunci, AdMob potrebbe raccogliere automaticamente:
+        </p>
+        <ul>
+          <li>Identificatori del dispositivo (es. Advertising ID)</li>
+          <li>Indirizzo IP</li>
+          <li>Dati di utilizzo dell'app e statistiche di interazione</li>
+          <li>Informazioni sul dispositivo (modello, sistema operativo, lingua)</li>
+          <li>Dati di diagnostica e performance</li>
+        </ul>
+        <p>
+          La raccolta e il trattamento di tali dati avviene secondo la 
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy di Google</a>. 
+          L'utente può rimuovere il banner pubblicitario tramite un acquisto in-app 
+          una tantum, eliminando così qualsiasi raccolta di dati da parte di AdMob.
+        </p>
+      </div>
+
+      <!-- 04 -->
+      <div id="finalita" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">04</span>
+          <h3>Finalità del trattamento</h3>
+        </div>
+        <p>I dati inseriti dall'utente vengono utilizzati esclusivamente per:</p>
+        <ul>
+          <li>Fornire le funzionalità dell'App (visualizzazione dati, calcoli, statistiche)</li>
+          <li>Conservare le preferenze dell'utente (tema, impostazioni di visualizzazione)</li>
+          <li>Mantenere lo storico delle attività registrate dall'utente</li>
+        </ul>
+        <p>I dati raccolti da Google AdMob vengono utilizzati per:</p>
+        <ul>
+          <li>Mostrare annunci pubblicitari pertinenti o non personalizzati</li>
+          <li>Misurare le performance e l'efficacia degli annunci</li>
+        </ul>
+      </div>
+
+      <!-- 05 -->
+      <div id="base" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">05</span>
+          <h3>Base giuridica del trattamento</h3>
+        </div>
+        <p>
+          Il trattamento dei dati inseriti dall'utente si basa sul 
+          <strong class="text-stone-700">consenso</strong> espresso attraverso 
+          l'utilizzo volontario dell'App e l'inserimento dei dati.
+        </p>
+        <p>
+          Per i dati raccolti da Google AdMob, la base giuridica è il 
+          <strong class="text-stone-700">legittimo interesse</strong> al finanziamento 
+          del servizio tramite pubblicità, nel rispetto del Regolamento Generale 
+          sulla Protezione dei Dati (GDPR — Regolamento UE 2016/679).
+        </p>
+      </div>
+
+      <!-- 06 -->
+      <div id="conservazione" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">06</span>
+          <h3>Conservazione dei dati</h3>
+        </div>
+        <p>
+          I dati inseriti dall'utente vengono conservati sul dispositivo fino a quando:
+        </p>
+        <ul>
+          <li>L'utente li elimina manualmente tramite le funzioni dell'App</li>
+          <li>L'utente disinstalla l'App dal dispositivo</li>
+        </ul>
+        <p>
+          Non esistono copie di backup su server remoti o cloud. 
+          La disinstallazione dell'App comporta la perdita definitiva di tutti i dati 
+          locali, che non potranno essere recuperati.
+        </p>
+      </div>
+
+      <!-- 07 -->
+      <div id="condivisione" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">07</span>
+          <h3>Condivisione dei dati</h3>
+        </div>
+        <p>
+          I dati inseriti dall'utente <strong class="text-stone-700">non vengono 
+          condivisi con terze parti</strong> da parte nostra in nessuna circostanza.
+        </p>
+        <p>
+          L'unica terza parte coinvolta è <strong class="text-stone-700">Google AdMob</strong>, 
+          che opera autonomamente secondo la propria informativa sulla privacy. 
+          Per maggiori informazioni:
+        </p>
+        <ul>
+          <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy di Google</a></li>
+          <li><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Come Google utilizza i dati nelle app partner</a></li>
+        </ul>
+      </div>
+
+      <!-- 08 -->
+      <div id="trasferimento" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">08</span>
+          <h3>Trasferimento internazionale dei dati</h3>
+        </div>
+        <p>
+          I dati inseriti dall'utente non vengono trasferiti al di fuori del dispositivo 
+          e pertanto non sono soggetti a trasferimenti internazionali.
+        </p>
+        <p>
+          Google AdMob potrebbe trasferire i dati raccolti in paesi al di fuori 
+          dello Spazio Economico Europeo. Google garantisce adeguate salvaguardie 
+          per tali trasferimenti in conformità alle normative applicabili.
+        </p>
+      </div>
+
+      <!-- 09 -->
+      <div id="diritti" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">09</span>
+          <h3>Diritti dell'utente</h3>
+        </div>
+        <p>In conformità al GDPR, l'utente ha il diritto di:</p>
+        <ul>
+          <li><strong class="text-stone-600">Accesso</strong> — richiedere informazioni sui dati trattati</li>
+          <li><strong class="text-stone-600">Rettifica</strong> — correggere dati inesatti tramite le funzioni dell'App</li>
+          <li><strong class="text-stone-600">Cancellazione</strong> — eliminare i propri dati tramite l'App o disinstallandola</li>
+          <li><strong class="text-stone-600">Limitazione</strong> — limitare il trattamento dei propri dati</li>
+          <li><strong class="text-stone-600">Portabilità</strong> — ricevere i propri dati in formato strutturato</li>
+          <li><strong class="text-stone-600">Opposizione</strong> — opporsi al trattamento basato sul legittimo interesse</li>
+          <li><strong class="text-stone-600">Revoca del consenso</strong> — in qualsiasi momento, senza pregiudicare la liceità del trattamento precedente</li>
+        </ul>
+        <p>
+          Per esercitare questi diritti contattare il titolare all'indirizzo email 
+          indicato nella sezione 01. L'utente ha inoltre il diritto di proporre 
+          reclamo al <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.
+        </p>
+      </div>
+
+      <!-- 10 -->
+      <div id="sicurezza" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">10</span>
+          <h3>Sicurezza dei dati</h3>
+        </div>
+        <p>
+          I dati inseriti dall'utente sono protetti dalle misure di sicurezza 
+          del sistema operativo Android del dispositivo. Poiché non trasmettiamo 
+          dati su reti esterne, il rischio di intercettazione durante la trasmissione 
+          è eliminato alla radice.
+        </p>
+        <p>
+          Tuttavia, nessun sistema è completamente sicuro. In caso di smarrimento 
+          o furto del dispositivo, i dati potrebbero essere accessibili a chi 
+          ottiene accesso fisico allo stesso. Si consiglia di proteggere il 
+          dispositivo con PIN, impronta digitale o altri metodi di blocco schermo.
+        </p>
+      </div>
+
+      <!-- 11 -->
+      <div id="minori" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">11</span>
+          <h3>Minori</h3>
+        </div>
+        <p>
+          Le App non sono destinate a minori di 13 anni. Non raccogliamo 
+          consapevolmente dati personali di minori. Se sei un genitore o tutore 
+          e ritieni che tuo figlio abbia fornito dati personali tramite una delle 
+          nostre App, contattaci per richiederne la cancellazione.
+        </p>
+      </div>
+
+      <!-- 12 -->
+      <div id="modifiche" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">12</span>
+          <h3>Modifiche alla presente informativa</h3>
+        </div>
+        <p>
+          Ci riserviamo il diritto di modificare la presente Informativa sulla Privacy 
+          in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina 
+          con aggiornamento della data in cima al documento.
+        </p>
+        <p>
+          L'utilizzo continuato delle App dopo la pubblicazione delle modifiche 
+          costituisce accettazione delle stesse. In caso di modifiche sostanziali, 
+          ne daremo comunicazione tramite le App stesse.
+        </p>
+      </div>
+
+      <!-- 13 -->
+      <div id="contatti" class="bg-white rounded-2xl border border-stone-200 p-8 prose" data-animate>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs font-bold text-stone-300 font-mono">13</span>
+          <h3>Contatti</h3>
+        </div>
+        <p>
+          Per qualsiasi domanda relativa alla presente Informativa sulla Privacy 
+          o al trattamento dei dati personali:
+        </p>
+        <div class="bg-stone-50 rounded-xl p-4 border border-stone-100 mt-2">
+          <p class="mb-0">
+            <strong class="text-stone-700">Fotios Kossyvas</strong><br/>
+            Email: <a href="mailto:fotisappdev@gmail.com">fotisappdev@gmail.com</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Note legali -->
+      <div class="bg-moss-100 rounded-2xl border border-moss-400/20 p-6" data-animate>
+        <p class="text-xs text-moss-600 leading-relaxed mb-0">
+          Questa informativa è conforme al <strong>Regolamento Generale sulla Protezione dei Dati 
+          (GDPR — Regolamento UE 2016/679)</strong> e alle norme di Google Play Store 
+          in materia di privacy.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 border-t border-stone-800 py-8">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">Home</a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">GitHub</a>
+      </div>
+      <div class="text-stone-600 text-xs">© 2026 Fotios Kossyvas</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+
+</body>
 </html>

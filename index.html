@@ -1,117 +1,311 @@
 <!DOCTYPE html>
-<html dir="auto" lang="en">
+<html lang="it">
 <head>
-	<meta charset="UTF-8" />
-	<title>My Page Title</title>
-
-	<meta name="description" content="My Page Description" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="icon" href="assets/favicon.png" />
-
-	<meta property="og:title" content="My Page Title" />
-	<meta property="og:description" content="My Page Description" />
-	<meta property="og:image" content="assets/og-image.png" />
-
-	<link rel="stylesheet" href="assets/tobi.css" />
-	<link rel="stylesheet" href="assets/style.css" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fotios Kossyvas — App Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['DM Serif Display', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            moss: { 100: '#eef3e8', 400: '#7a9e5f', 500: '#5f7f45', 600: '#4a6434' }
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: #4a6434; transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.07); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 99px; font-size: 12px;
+      font-weight: 500; letter-spacing: 0.02em;
+    }
+    [data-animate] { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    [data-animate].visible { opacity: 1; transform: translateY(0); }
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-	<body>
-		<main>
-<header class="app__header container">
-	<div class="app__logo-wrapper"> <img class="app__logo" src="content/image/app_icon.png" alt="SegnaBurraco"></div>
-	<div class="app__infos">
-		<h1 class="app__name">SegnaBurraco</h1>
-		<p class="app__description">Segnapunti per Burraco con classifica, statistiche e gestione giocatori</p>
-		<div class="app__buttons app__buttons--desktop">
-			<a href="https://play.google.com/store" class="app__button-play" target="_blank" title="Scaricalo da Google Play">
-				<img src="assets/google-play-badge.png" alt="Scaricalo da Google Play">
-			</a>
-		</div>
-	</div>
-</header>
-<div class="app__buttons app__buttons--mobile container">
-	<a href="https://play.google.com/store" class="app__button-play" target="_blank" title="Scaricalo da Google Play">
-		<img src="assets/google-play-badge.png" alt="Scaricalo da Google Play">
-	</a>
-</div>
-<section class="app__screenshots app__section">
-	<div class="container">
-		<h2 class="app__section-title">Schermate</h2>
-	</div>
-	<div class="app__screenshots-wrapper container-desktop">
-		<div class="app__screenshots-list">
-			<a href="content/image/zck2pns1sin6ahy8eq73.jpg" class="lightbox">
-				<img src="content/image/zck2pns1sin6ahy8eq73.jpg" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/zx4c0kkw5iezvlbqwh8o.jpg" class="lightbox">
-				<img src="content/image/zx4c0kkw5iezvlbqwh8o.jpg" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/7fuc4hpdgyid8ju18n3r.jpg" class="lightbox">
-				<img src="content/image/7fuc4hpdgyid8ju18n3r.jpg" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/ofmmsvu27d26c34tqtp5.jpg" class="lightbox">
-				<img src="content/image/ofmmsvu27d26c34tqtp5.jpg" class="app__screenshot" alt="" />
-			</a>
-		</div>
-	</div>
-</section>
-<section class="app__fulldescription app__section container">
-	<h2 class="app__section-title">Descrizione</h2>
-	<div class="app__fulldescription-content">
-		<p>SegnaBurraco è l&#39;app definitiva per tenere traccia delle tue partite a Burraco, il popolare gioco di carte italiano. Semplice da usare, elegante nel design e 
-ricca di funzionalità, SegnaBurraco rende ogni partita più organizzata e divertente.</p>
-<p>🃏 GESTIONE PARTITE</p>
-<p>Crea partite in tre diverse modalità:
-- 2 giocatori: sfida diretta uno contro uno
-- 3 giocatori: competizione triangolare
-- 4 giocatori: modalità in coppia, due contro due</p>
-<p>Per ogni partita puoi aggiungere le mani una alla volta, inserendo i punti base e i punti carte per ogni squadra. Il punteggio totale viene calcolato 
-automaticamente e la partita si chiude da sola quando una squadra raggiunge i 2005 punti. Puoi modificare o correggere qualsiasi mano con un semplice tocco.</p>
-<p>👥 ANAGRAFICA GIOCATORI</p>
-<p>Registra i tuoi amici e familiari nell&#39;archivio giocatori. Per ogni giocatore puoi inserire il nome completo e un soprannome. Quando crei una nuova partita,
- selezioni i giocatori direttamente dall&#39;elenco — niente più errori di battitura o nomi dimenticati. Un giocatore associato a una o più partite non può essere 
-eliminato accidentalmente, così i tuoi dati storici sono sempre al sicuro.</p>
-<p>🏆 CLASSIFICA</p>
-<p>SegnaBurraco tiene traccia automaticamente delle performance di ogni giocatore nel tempo. La classifica assegna:
-- 2 punti per ogni vittoria in modalità singola (2 o 3 giocatori)
-- 1 punto per ogni vittoria in coppia (4 giocatori)
-Un podio visivo mette in evidenza i primi tre classificati, mentre la tabella completa mostra punti totali, vittorie e partite giocate per ogni giocatore.
-La classifica si aggiorna in tempo reale dopo ogni partita conclusa.</p>
-<p>🎨 PERSONALIZZAZIONE</p>
-<p>Scegli il tema dell&#39;app tra cinque colori: Viola, Blu, Verde, Arancione e Rosso.
-Seleziona la modalità display che preferisci: chiara, scura, o automatica (segue le impostazioni del tuo dispositivo). Le tue preferenze vengono salvate 
-e ripristinate ad ogni avvio.</p>
-<p>📱 DESIGN MODERNO</p>
-<p>SegnaBurraco è costruita seguendo le linee guida Material Design 3 di Google, con un&#39;interfaccia pulita, intuitiva e piacevole da usare. La navigazione 
-tra le sezioni è immediata grazie al menu in basso, sempre visibile e accessibile.</p>
-<p>💾 DATI AL SICURO</p>
-<p>Tutte le partite, i giocatori e le statistiche vengono salvati localmente sul tuo dispositivo tramite un database SQLite integrato. I tuoi dati sono 
-sempre disponibili, anche senza connessione a internet, e non vengono mai condivisi con server esterni.</p>
-<p>SegnaBurraco è l&#39;app che mancava a ogni appassionato di Burraco.</p>
-<p>Scaricala ora e porta il tuo gioco al livello successivo!</p>
+<body class="bg-stone-50 text-stone-800 antialiased">
 
-	</div>
-</section>
-		</main>
-		<footer class="footer">
-			<div class="container">
-				<div class="footer__container">
-					<ul class="footer__links">
-							<li class="footer__link">
-								<a href="privacy.html">Privacy</a>
-							</li>
-					</ul>
-				</div>
-			</div>
-		</footer>
+  <div class="grain"></div>
 
-		<script type="text/javascript" src="assets/tobi.min.js" /></script>
-		<script>
-			window.onload = function () {
-				var tobi = new Tobi();
-			};
-		</script>
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-stone-50/90 backdrop-blur-sm border-b border-stone-200">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="font-serif text-xl text-stone-800 tracking-tight">Home<span class="text-moss-500">.</span></a>
+      <nav class="flex items-center gap-8">
 
-  </body>
+
+
+        <a href="#valori" class="nav-link text-sm text-stone-600 hover:text-stone-900 transition-colors">Valori</a>
+        <a href="#contatti" class="nav-link text-sm text-stone-600 hover:text-stone-900 transition-colors">Contatti</a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener"
+           class="flex items-center gap-2 text-sm bg-stone-800 text-stone-50 px-4 py-2 rounded-full hover:bg-stone-700 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center pt-16">
+    <div class="max-w-5xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="pill bg-moss-100 text-moss-600 mb-6" data-animate>
+          <span class="w-2 h-2 rounded-full bg-moss-500 animate-pulse inline-block"></span>
+          Sviluppatore Indipendente
+        </div>
+        <h1 class="font-serif text-5xl lg:text-6xl leading-tight text-stone-900 mb-6" data-animate style="transition-delay:0.1s">
+          App semplici.<br/><em class="text-moss-500">Davvero</em> utili.
+        </h1>
+        <p class="text-stone-500 text-lg leading-relaxed mb-8 font-light" data-animate style="transition-delay:0.2s">
+          Ciao, sono Fotios. Creo applicazioni Android pensate per chi vuole 
+          strumenti che funzionano — senza connessione internet, senza abbonamenti, 
+          senza pubblicità invasiva. Solo codice pulito al servizio di chi lo usa.
+        </p>
+        <div class="flex flex-wrap gap-4" data-animate style="transition-delay:0.3s">
+          <a href="#app" class="bg-stone-800 text-stone-50 px-6 py-3 rounded-full text-sm font-medium hover:bg-stone-700 transition-colors">
+            Scopri le App
+          </a>
+          <a href="#valori" class="border border-stone-300 text-stone-700 px-6 py-3 rounded-full text-sm font-medium hover:border-stone-500 transition-colors">
+            La mia filosofia
+          </a>
+        </div>
+      </div>
+
+      <!-- Card decorativa -->
+      <div class="hidden lg:flex items-center justify-center" data-animate style="transition-delay:0.2s">
+        <div class="relative w-80 h-80">
+          <div class="absolute inset-0 rounded-3xl bg-moss-400/10 rotate-6"></div>
+          <div class="absolute inset-4 rounded-2xl bg-moss-400/15 -rotate-3"></div>
+          <div class="absolute inset-8 rounded-2xl bg-stone-50 border border-stone-200 shadow-sm flex flex-col items-center justify-center text-center p-8">
+            <div class="text-5xl mb-4">📱</div>
+            <div class="font-serif text-lg text-stone-800 mb-1">Le mie app</div>
+            <div class="text-xs text-stone-400 mb-5">Piccole. Utili. Oneste.</div>
+            <div class="flex flex-col gap-2.5 w-full text-left">
+              <div class="flex items-center gap-2 text-xs text-stone-500">
+                <svg class="w-3.5 h-3.5 text-moss-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                Funzionano offline
+              </div>
+              <div class="flex items-center gap-2 text-xs text-stone-500">
+                <svg class="w-3.5 h-3.5 text-moss-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                Nessun abbonamento
+              </div>
+              <div class="flex items-center gap-2 text-xs text-stone-500">
+                <svg class="w-3.5 h-3.5 text-moss-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                Privacy garantita
+              </div>
+              <div class="flex items-center gap-2 text-xs text-stone-500">
+                <svg class="w-3.5 h-3.5 text-moss-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                Solo un banner discreto
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORI -->
+  <section id="valori" class="py-24 bg-stone-100/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-16 text-center" data-animate>
+        <div class="pill bg-stone-200 text-stone-500 mb-4 mx-auto w-fit">La mia filosofia</div>
+        <h2 class="font-serif text-4xl text-stone-900">Quattro principi,<br/>nessun compromesso.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-white rounded-2xl p-8 border border-stone-200 card-hover" data-animate>
+          <div class="w-12 h-12 rounded-xl bg-moss-100 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-moss-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M6.343 6.343a9 9 0 000 12.728m2.829-2.829a5 5 0 000-7.072"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl text-stone-900 mb-3">Funziona offline</h3>
+          <p class="text-stone-500 text-sm leading-relaxed">
+            Le mie app funzionano senza connessione a internet. I tuoi dati vivono 
+            sul tuo smartphone, non su un server dall'altra parte del mondo. 
+            Niente dipendenze da infrastrutture esterne, niente interruzioni di servizio.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-stone-200 card-hover" data-animate style="transition-delay:0.1s">
+          <div class="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl text-stone-900 mb-3">Privacy by design</h3>
+          <p class="text-stone-500 text-sm leading-relaxed">
+            Nessun dato personale viene mai inviato su internet. Tutto ciò che inserisci 
+            rimane sul tuo dispositivo, protetto dal sistema operativo del tuo smartphone. 
+            L'unico permesso di rete è per il piccolo banner pubblicitario — 
+            e anche quello puoi rimuoverlo con un piccolo contributo.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-stone-200 card-hover" data-animate style="transition-delay:0.15s">
+          <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl text-stone-900 mb-3">Nessun abbonamento</h3>
+          <p class="text-stone-500 text-sm leading-relaxed">
+            Scarichi l'app, la usi per sempre. Non ci sono piani mensili, 
+            tier premium nascosti o funzionalità bloccate. Il modello è semplice: 
+            un piccolo banner discreto in fondo allo schermo per sostenere il lavoro, 
+            oppure un pagamento una tantum per toglierlo. Fine.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 border border-stone-200 card-hover" data-animate style="transition-delay:0.2s">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl text-stone-900 mb-3">Pubblicità onesta</h3>
+          <p class="text-stone-500 text-sm leading-relaxed">
+            Se c'è pubblicità, è solo un piccolo banner discreto in fondo allo schermo. 
+            Niente popup, niente video forzati, niente annunci a schermo intero. 
+            Una promessa mantenuta in ogni app che pubblico.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APP PREVIEW -->
+  <section id="app" class="py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-16 text-center" data-animate>
+        <div class="pill bg-moss-100 text-moss-600 mb-4 mx-auto w-fit">Le mie app</div>
+        <h2 class="font-serif text-4xl text-stone-900">Strumenti pensati<br/>per la vita di tutti i giorni.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- SegnaBurraco -->
+        <a href="./segnaburraco/segnaburraco.html" class="group bg-white rounded-2xl border border-stone-200 overflow-hidden card-hover block" data-animate>
+          <div class="bg-gradient-to-br from-violet-50 to-purple-100 px-8 py-10 flex items-center justify-center">
+            <div class="text-center">
+              <center><img src="./segnaburraco/icon.png" alt="SegnaBurraco" class="w-20 h-20 rounded-2xl shadow-lg"/></center>
+              <div class="font-serif text-stone-700">SegnaBurraco</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="pill bg-moss-100 text-moss-600">Offline</span>
+              <span class="pill bg-stone-100 text-stone-500">Gratuita</span>
+            </div>
+            <p class="text-stone-500 text-sm leading-relaxed mb-4">
+              Segnapunti completo per il Burraco. Gestisci giocatori, partite e classifica 
+              direttamente dal tuo smartphone.
+            </p>
+            <div class="flex items-center gap-1 text-moss-600 text-sm font-medium group-hover:gap-2 transition-all">
+              Scopri di più
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Prossimamente 1 -->
+        <div class="bg-stone-50 rounded-2xl border border-dashed border-stone-300 flex items-center justify-center p-8 min-h-64" data-animate style="transition-delay:0.1s">
+          <div class="text-center">
+            <div class="text-3xl mb-3 opacity-30">✦</div>
+            <div class="text-stone-400 text-sm font-medium">Prossimamente</div>
+            <div class="text-stone-300 text-xs mt-1">Nuove app in arrivo</div>
+          </div>
+        </div>
+
+        <!-- Prossimamente 2 -->
+        <div class="bg-stone-50 rounded-2xl border border-dashed border-stone-300 items-center justify-center p-8 min-h-64 hidden lg:flex" data-animate style="transition-delay:0.2s">
+          <div class="text-center">
+            <div class="text-3xl mb-3 opacity-30">✦</div>
+            <div class="text-stone-400 text-sm font-medium">Prossimamente</div>
+            <div class="text-stone-300 text-xs mt-1">Nuove app in arrivo</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti" class="py-24 bg-stone-900 text-stone-50">
+    <div class="max-w-5xl mx-auto px-6 text-center" data-animate>
+      <div class="pill bg-stone-700 text-stone-300 mb-6 mx-auto w-fit">Contatti</div>
+      <h2 class="font-serif text-4xl mb-6">Hai un'idea per una app?<br/>Parliamone.</h2>
+      <p class="text-stone-400 text-lg font-light max-w-xl mx-auto mb-10">
+        Sono sempre aperto a suggerimenti, segnalazioni di bug o idee per nuovi 
+        strumenti. Scrivimi, rispondo a tutti.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="mailto:fotisappdev@gmail.com"
+           class="flex items-center gap-2 bg-stone-50 text-stone-900 px-6 py-3 rounded-full text-sm font-medium hover:bg-stone-200 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Scrivimi una email
+        </a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener"
+           class="flex items-center gap-2 border border-stone-600 text-stone-300 px-6 py-3 rounded-full text-sm font-medium hover:border-stone-400 hover:text-stone-100 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 border-t border-stone-800 py-8">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-6">
+        <a href="privacy.html" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">Privacy Policy</a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">GitHub</a>
+      </div>
+      <div class="text-stone-600 text-xs">© 2026 Fotios Kossyvas</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+
+</body>
 </html>

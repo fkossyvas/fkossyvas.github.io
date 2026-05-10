@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SegnaBurraco — Segnapunti per Burraco</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['DM Serif Display', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            moss: { 100: '#eef3e8', 400: '#7a9e5f', 500: '#5f7f45', 600: '#4a6434' }
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: #4a6434; transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 99px; font-size: 12px;
+      font-weight: 500; letter-spacing: 0.02em;
+    }
+    [data-animate] { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    [data-animate].visible { opacity: 1; transform: translateY(0); }
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.07); }
+    html { scroll-behavior: smooth; }
+
+    /* Screenshot phone frame */
+    .phone-frame {
+      position: relative;
+      width: 180px;
+      flex-shrink: 0;
+    }
+    .phone-frame .frame {
+      position: relative;
+      width: 180px;
+      height: 360px;
+      background: #1c1917;
+      border-radius: 28px;
+      padding: 10px 8px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.1);
+    }
+    .phone-frame .screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #f5f5f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-frame .notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 6px;
+      background: #1c1917;
+      border-radius: 3px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-stone-50/90 backdrop-blur-sm border-b border-stone-200">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="../index.html" class="font-serif text-xl text-stone-800 tracking-tight">Home<span class="text-moss-500">.</span></a>
+      <nav class="flex items-center gap-8">
+        <a href="../index.html#valori" class="nav-link text-sm text-stone-600 hover:text-stone-900 transition-colors">Valori</a>
+        <a href="../index.html#contatti" class="nav-link text-sm text-stone-600 hover:text-stone-900 transition-colors">Contatti</a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener"
+           class="flex items-center gap-2 text-sm bg-stone-800 text-stone-50 px-4 py-2 rounded-full hover:bg-stone-700 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Testo -->
+        <div>
+          <!-- Icona app + titolo -->
+          <div class="flex items-center gap-5 mb-8" data-animate>
+			<img src="icon.png" class="w-20 h-20 rounded-2xl shadow-lg" alt="SegnaBurraco icon"/>
+            </div>
+            <div>
+              <h1 class="font-serif text-3xl text-stone-900 leading-tight">SegnaBurraco</h1>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-6" data-animate style="transition-delay:0.05s">
+            <span class="pill bg-moss-100 text-moss-600">Offline</span>
+            <span class="pill bg-stone-100 text-stone-500">Gratuita</span>
+            <span class="pill bg-violet-50 text-violet-600">Android</span>
+            <span class="pill bg-amber-50 text-amber-600">Burraco</span>
+          </div>
+
+          <p class="text-stone-500 text-lg leading-relaxed mb-4 font-light" data-animate style="transition-delay:0.1s">
+            Il segnapunti definitivo per le tue partite a Burraco. Semplice, veloce 
+            e sempre disponibile — anche senza connessione internet.
+          </p>
+          <p class="text-stone-400 text-sm leading-relaxed mb-8" data-animate style="transition-delay:0.15s">
+            Registra i giocatori, gestisci le partite in modalità da 2, 3 o 4 giocatori, 
+            tieni traccia delle mani e scopri chi è il campione tra i tuoi amici 
+            con la classifica automatica. I tuoi dati rimangono sempre sul tuo 
+            smartphone, al sicuro e privati.
+          </p>
+
+          <!-- Bottone Google Play -->
+          <div data-animate style="transition-delay:0.2s">
+            <a href="https://play.google.com/store/apps/details?id=com.fkossyvas.segnaburraco"
+               target="_blank" rel="noopener"
+               class="inline-block hover:opacity-90 transition-opacity">
+              <!-- Badge Google Play SVG ufficiale -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+                <rect width="200" height="60" rx="8" fill="#1c1917"/>
+                <text x="62" y="22" font-family="DM Sans, sans-serif" font-size="9" fill="#a8a29e" letter-spacing="1">SCARICA SU</text>
+                <text x="62" y="42" font-family="DM Serif Display, serif" font-size="20" fill="#fafaf9" letter-spacing="0.3">Google Play</text>
+                <!-- Play store icon -->
+                <g transform="translate(18, 16)">
+                  <path d="M1.5 0.5 L22 14 L1.5 27.5 Z" fill="url(#pg)" opacity="0.9"/>
+                  <path d="M1.5 0.5 L12.5 11.5 L1.5 0.5Z" fill="#4fc3f7"/>
+                  <path d="M1.5 27.5 L12.5 16.5 L1.5 27.5Z" fill="#f48fb1"/>
+                  <path d="M22 14 L12.5 11.5 L22 14Z" fill="#a5d6a7"/>
+                  <path d="M22 14 L12.5 16.5 L22 14Z" fill="#ffcc02"/>
+                  <defs>
+                    <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#4fc3f7"/>
+                      <stop offset="50%" stop-color="#a5d6a7"/>
+                      <stop offset="100%" stop-color="#ffcc02"/>
+                    </linearGradient>
+                  </defs>
+                </g>
+              </svg>
+            </a>
+            <p class="text-stone-400 text-xs mt-2">Gratis · Android 8.0+</p>
+          </div>
+        </div>
+
+        <!-- Screenshot hero (primo screenshot in evidenza) -->
+        <div class="hidden lg:flex items-center justify-center" data-animate style="transition-delay:0.2s">
+          <div class="relative">
+            <div class="absolute -inset-8 bg-gradient-to-br from-violet-100 to-purple-50 rounded-3xl -rotate-3"></div>
+            <div class="phone-frame relative z-10" style="width:200px">
+              <div class="frame" style="width:200px; height:400px; border-radius:32px; padding:12px 10px">
+                <div class="notch" style="top:12px"></div>
+                <div class="screen" style="border-radius:22px; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)">
+                  <!-- Placeholder screenshot 1 -->
+                  <img src="screenshot_1.jpg" class="w-full h-full object-cover" alt="Screenshot partite"/>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNZIONALITÀ -->
+  <section class="py-20 bg-stone-100/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-14 text-center" data-animate>
+        <div class="pill bg-stone-200 text-stone-500 mb-4 mx-auto w-fit">Funzionalità</div>
+        <h2 class="font-serif text-4xl text-stone-900">Tutto quello che serve,<br/>niente di superfluo.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-white rounded-2xl p-7 border border-stone-200 card-hover" data-animate>
+          <div class="w-11 h-11 rounded-xl bg-violet-50 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-lg text-stone-900 mb-2">Gestione giocatori</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Registra i tuoi amici con nome e soprannome. Selezionali rapidamente 
+            all'inizio di ogni partita senza ridigitare nulla.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-stone-200 card-hover" data-animate style="transition-delay:0.1s">
+          <div class="w-11 h-11 rounded-xl bg-moss-100 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-moss-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-lg text-stone-900 mb-2">Partite e mani</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Tre modalità: 2, 3 o 4 giocatori. Inserisci punti base e punti carte 
+            per ogni mano. La partita si chiude automaticamente a 2005 punti.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-stone-200 card-hover" data-animate style="transition-delay:0.2s">
+          <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-lg text-stone-900 mb-2">Classifica automatica</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            La classifica si aggiorna da sola. 2 punti per vittoria singola, 
+            1 punto per vittoria in coppia. Con podio visivo per i top 3.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-stone-200 card-hover" data-animate style="transition-delay:0.05s">
+          <div class="w-11 h-11 rounded-xl bg-stone-100 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-lg text-stone-900 mb-2">Privacy totale</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Tutti i dati rimangono sul tuo smartphone. Niente cloud, niente account, 
+            niente server. I tuoi dati sono tuoi.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-stone-200 card-hover" data-animate style="transition-delay:0.15s">
+          <div class="w-11 h-11 rounded-xl bg-moss-100 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-moss-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636a9 9 0 010 12.728M6.343 6.343a9 9 0 000 12.728M8.464 8.464a5 5 0 000 7.072M15.536 8.464a5 5 0 010 7.072"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-lg text-stone-900 mb-2">Funziona offline</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Niente connessione internet necessaria. Funziona ovunque — 
+            in vacanza, in montagna, dove vuoi.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-7 border border-stone-200 card-hover" data-animate style="transition-delay:0.25s">
+          <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-lg text-stone-900 mb-2">5 temi di colore</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Personalizza l'app con 5 colori: Viola, Blu, Verde, Arancione, Rosso. 
+            Con supporto dark mode automatico o manuale.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOT -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="mb-14 text-center" data-animate>
+        <div class="pill bg-violet-50 text-violet-600 mb-4 mx-auto w-fit">Screenshot</div>
+        <h2 class="font-serif text-4xl text-stone-900">Guarda come funziona.</h2>
+        <p class="text-stone-400 text-sm mt-3">Design Material 3 · Interfaccia in italiano</p>
+      </div>
+
+      <!-- 4 screenshot in fila -->
+      <div class="flex gap-6 overflow-x-auto pb-4 justify-start md:justify-center" data-animate style="transition-delay:0.1s">
+
+        <!-- Screenshot 1 -->
+        <div class="phone-frame flex-shrink-0">
+          <div class="frame">
+            <div class="notch"></div>
+            <div class="screen">
+              <img src="screenshot_1.jpg" class="w-full h-full object-cover" alt="Schermata Partite"/>
+            </div>
+          </div>
+          <p class="text-center text-xs text-stone-400 mt-3">Lista partite</p>
+        </div>
+
+        <!-- Screenshot 2 -->
+        <div class="phone-frame flex-shrink-0">
+          <div class="frame">
+            <div class="notch"></div>
+            <div class="screen">
+              <img src="screenshot_2.jpg" class="w-full h-full object-cover" alt="Schermata Mani"/>
+            </div>
+          </div>
+          <p class="text-center text-xs text-stone-400 mt-3">Dettaglio mani</p>
+        </div>
+
+        <!-- Screenshot 3 -->
+        <div class="phone-frame flex-shrink-0">
+          <div class="frame">
+            <div class="notch"></div>
+            <div class="screen">
+              <img src="screenshot_3.jpg" class="w-full h-full object-cover" alt="Schermata Giocatori"/>
+            </div>
+          </div>
+          <p class="text-center text-xs text-stone-400 mt-3">Gestione giocatori</p>
+        </div>
+
+        <!-- Screenshot 4 -->
+        <div class="phone-frame flex-shrink-0">
+          <div class="frame">
+            <div class="notch"></div>
+            <div class="screen">
+              <img src="screenshot_4.jpg" class="w-full h-full object-cover" alt="Schermata Classifica"/>
+            </div>
+          </div>
+          <p class="text-center text-xs text-stone-400 mt-3">Classifica giocatori</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOWNLOAD CTA -->
+  <section class="py-24 bg-gradient-to-br from-violet-900 via-purple-900 to-stone-900 text-stone-50">
+    <div class="max-w-5xl mx-auto px-6 text-center" data-animate>
+      <div class="text-5xl mb-6">🃏</div>
+      <h2 class="font-serif text-4xl mb-4">Pronto a giocare?</h2>
+      <p class="text-stone-400 text-lg font-light max-w-lg mx-auto mb-10">
+        Scarica SegnaBurraco gratuitamente e inizia a tenere traccia 
+        delle tue partite in pochi secondi.
+      </p>
+
+      <!-- Bottone Play Store grande -->
+      <a href="https://play.google.com/store/apps/details?id=com.fkossyvas.segnaburraco"
+         target="_blank" rel="noopener"
+         class="inline-flex items-center gap-4 bg-white text-stone-900 px-8 py-4 rounded-2xl hover:bg-stone-100 transition-colors shadow-xl">
+        <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
+          <path d="M2 1.5 L29 16 L2 30.5 Z" fill="url(#pg2)"/>
+          <path d="M2 1.5 L16 15.5 L2 1.5Z" fill="#4fc3f7" opacity="0.9"/>
+          <path d="M2 30.5 L16 16.5 L2 30.5Z" fill="#f48fb1" opacity="0.9"/>
+          <defs>
+            <linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4fc3f7"/>
+              <stop offset="50%" stop-color="#a5d6a7"/>
+              <stop offset="100%" stop-color="#ffcc02"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="text-left">
+          <div class="text-xs text-stone-400 leading-none mb-0.5">Scarica su</div>
+          <div class="font-serif text-2xl leading-tight">Google Play</div>
+        </div>
+      </a>
+
+      <div class="flex items-center justify-center gap-6 mt-8">
+        <div class="flex items-center gap-2 text-stone-400 text-sm">
+          <svg class="w-4 h-4 text-moss-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          Completamente gratuita
+        </div>
+        <div class="flex items-center gap-2 text-stone-400 text-sm">
+          <svg class="w-4 h-4 text-moss-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          Nessun account richiesto
+        </div>
+        <div class="flex items-center gap-2 text-stone-400 text-sm">
+          <svg class="w-4 h-4 text-moss-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          Android 8.0+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 border-t border-stone-800 py-8">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-6">
+        <a href="../privacy.html" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">Privacy Policy</a>
+        <a href="../index.html" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">Home</a>
+        <a href="https://github.com/fkossyvas" target="_blank" rel="noopener" class="text-stone-500 text-xs hover:text-stone-300 transition-colors">GitHub</a>
+      </div>
+      <div class="text-stone-600 text-xs">© 2026 Fotios Kossyvas</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
