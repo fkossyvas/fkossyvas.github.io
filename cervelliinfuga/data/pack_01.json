@@ -1,0 +1,70 @@
+{
+  "pack_id": "pack_01",
+  "questions": [
+    {
+      "id": "p01_q01",
+      "category": "Scienza & Tech",
+      "question": "Quale gas costituisce circa il 78% dell'atmosfera terrestre?",
+      "options": [
+        "Ossigeno",
+        "Azoto",
+        "Anidride Carbonica",
+        "Idrogeno"
+      ],
+      "correct_index": 1,
+      "explanation": "L'azoto (N2) è il componente principale dell'atmosfera terrestre, occupando circa il 78% del volume."
+    },
+    {
+      "id": "p01_q02",
+      "category": "Geografia & Storia",
+      "question": "Qual è la capitale dell'Australia?",
+      "options": [
+        "Sydney",
+        "Melbourne",
+        "Canberra",
+        "Brisbane"
+      ],
+      "correct_index": 2,
+      "explanation": "Canberra fu scelta come capitale dell'Australia nel 1908 come compromesso tra Sydney e Melbourne."
+    },
+    {
+      "id": "p01_q03",
+      "category": "Arte & Cultura",
+      "question": "Chi ha dipinto la celebre opera 'La ragazza con l'orecchino di perla'?",
+      "options": [
+        "Vincent van Gogh",
+        "Johannes Vermeer",
+        "Rembrandt",
+        "Leonardo da Vinci"
+      ],
+      "correct_index": 1,
+      "explanation": "Il dipinto fu realizzato dal pittore olandese Johannes Vermeer intorno al 1665."
+    },
+    {
+      "id": "p01_q04",
+      "category": "Cinema & Spettacolo",
+      "question": "Quale film ha vinto il Premio Oscar come Miglior Film nel 2024?",
+      "options": [
+        "Oppenheimer",
+        "Barbie",
+        "Poor Things",
+        "Killers of the Flower Moon"
+      ],
+      "correct_index": 0,
+      "explanation": "Oppenheimer, diretto da Christopher Nolan, ha trionfato agli Oscar 2024 vincendo 7 statuette tra cui Miglior Film."
+    },
+    {
+      "id": "p01_q05",
+      "category": "Curiosità & Logica",
+      "question": "Quanti cuori possiede un polpo?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_index": 2,
+      "explanation": "I polpi hanno 3 cuori: due pompano il sangue alle branchie, mentre il terzo lo pompa al resto del corpo."
+    }
+  ]
+}
