@@ -1,9 +1,9 @@
 {
   "packs": [
     {
-      "id": "pack_02",
+      "id": "pack_01",
       "version": 1,
-      "file": "pack_02.enc"
+      "file": "pack_01.enc"
     }
   ]
 }
