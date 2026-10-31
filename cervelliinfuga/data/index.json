@@ -2,7 +2,7 @@
   "packs": [
     {
       "id": "pack_02",
-      "version": 1,
+      "version": 2,
       "file": "pack_02.enc"
     }
   ]
